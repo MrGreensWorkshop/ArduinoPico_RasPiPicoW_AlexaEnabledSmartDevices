@@ -1,0 +1,15 @@
+# this will handle to macos hidden folders
+# ignore all starts with .* except .git and so on
+.*
+!.git*
+!.editorconfig
+
+# OS generated
+ehthumbs.db
+Thumbs.db
+
+# diff files
+*.bak
+
+# build folder
+/build*

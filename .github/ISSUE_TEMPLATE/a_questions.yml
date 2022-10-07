@@ -1,0 +1,35 @@
+name: Ask a Question
+description: Something is not going according to plan?
+title: "<title>"
+labels: "delete me"
+body:
+- type: checkboxes
+  attributes:
+    label: Please check these items before go any further
+    description: Please search to see if an issue or discussion already exists for the problem you encountered.
+    options:
+    - label: I have watched [the related video](https://www.youtube.com/channel/UCf-BfpqjqvPKGXFc22rkR9w) on YouTube.
+      required: true
+    - label: I have searched the existing [Issues](https://github.com/MrGreensWorkshop/arduinoPico_RasPiPicoW_AlexaEnabledSmartDevices/issues/).
+      required: true
+    - label: I have searched the existing [Discussions](https://github.com/MrGreensWorkshop/arduinoPico_RasPiPicoW_AlexaEnabledSmartDevices/discussions/).
+      required: true
+    - label: I have checked the existing Issues in the [fauxmoESP repo](https://github.com/vintlabs/fauxmoESP/issues/) and the answer was not there.
+      required: true
+    - label: I have checked the existing Issues in the [arduino-pico repo](https://github.com/earlephilhower/arduino-pico/issues/) and the answer was not there.
+      required: true
+    - label: I have checked the existing Issues in the [AsyncTCP_RP2040W repo ](https://github.com/khoih-prog/AsyncTCP_RP2040W/issues/) and the answer was not there.
+      required: true
+- type: markdown
+  attributes:
+    value: |
+      Checked all above but still couldn't find an answer?
+      #### [Click here to ask a question in Discussions](https://github.com/MrGreensWorkshop/arduinoPico_RasPiPicoW_AlexaEnabledSmartDevices/discussions/new?category=problems)
+- type: dropdown
+  id: t
+  attributes:
+    label: "."
+    options:
+      - .
+  validations:
+    required: true
