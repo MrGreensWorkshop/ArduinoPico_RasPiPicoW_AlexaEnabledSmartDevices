@@ -26,16 +26,6 @@ THE SOFTWARE.
 
 */
 
-#include <Arduino.h>
-
-#if defined(ESP32)
-	#include <WiFi.h>
-#elif defined(ESP8266)
-	#include <ESP8266WiFi.h>
-#else
-	#error Platform not supported
-#endif
-
 #include "fauxmoESP.h"
 
 // -----------------------------------------------------------------------------
@@ -203,11 +193,11 @@ void fauxmoESP::_handleControl(AsyncClient *client, unsigned int device_id, void
     if (strstr(content, "SetBinaryState") != NULL) {
 
         if (strstr(content, "<BinaryState>0</BinaryState>") != NULL) {
-            if (_setCallback) _setCallback(device_id, device.name, false);
+            if (_setCallback) _setCallback(device_id, device.name, false, 0);
         }
 
         if (strstr(content, "<BinaryState>1</BinaryState>") != NULL) {
-            if (_setCallback) _setCallback(device_id, device.name, true);
+            if (_setCallback) _setCallback(device_id, device.name, true, 0);
         }
 
         // Use a specific response template for SetBinaryState action
@@ -216,7 +206,11 @@ void fauxmoESP::_handleControl(AsyncClient *client, unsigned int device_id, void
     }
 
     // Update current state
-    if (_getCallback) device.state = _getCallback(device_id, device.name);
+    if (_getCallback) {
+        unsigned char dummy_value = 0;
+        _getCallback(device_id, device.name, device.state, dummy_value);
+        _devices[device_id].state = device.state;
+    }
 
     // Send response
     char response[strlen_P(response_template) + 10];
@@ -227,7 +221,7 @@ void fauxmoESP::_handleControl(AsyncClient *client, unsigned int device_id, void
 
     client->write(headers, strlen(headers));
     client->write(response, strlen(response));
-
+    
 }
 
 void fauxmoESP::_onTCPData(AsyncClient *client, unsigned int device_id, void *data, size_t len) {
@@ -237,7 +231,7 @@ void fauxmoESP::_onTCPData(AsyncClient *client, unsigned int device_id, void *da
     /*
     char * p = (char *) data;
     p[len] = 0;
-    Serial.print(p);
+    DEBUG_MSG_FAUXMO("[FAUXMO] TCP data #%s \n", p);
     */
 
     {
@@ -336,19 +330,35 @@ unsigned char fauxmoESP::addDevice(const char * device_name) {
     // Chip ID
     #if defined(ESP32)
         unsigned long chip_id = (uint32_t) ESP.getEfuseMac();
-    #else
+    #elif defined(ESP8266)
         unsigned long chip_id = ESP.getChipId();
     #endif
 
-    // Create UUID
-    char uuid[15];
-    snprintf_P(uuid, sizeof(uuid), PSTR("%02X%06X46584D\0"), device_id, chip_id); // DEV_ID + CHIPID + "FXM"
-    new_device.uuid = strdup(uuid);
+    #if defined(ESP32) || defined(ESP8266)
+	    // Create UUID
+	    char uuid[15];
+	    snprintf_P(uuid, sizeof(uuid), PSTR("%02X%06X46584D\0"), device_id, chip_id); // DEV_ID + CHIPID + "FXM"
+	    new_device.uuid = strdup(uuid);
+	
+	    // Create Serialnumber
+	    char serial[15];
+	    sprintf(serial, "221703K0%06X\0", chip_id); // "221703K0" + CHIPID
+	    new_device.serial = strdup(serial);
+    #elif defined(ARDUINO_RASPBERRY_PI_PICO_W)
+	    // Get Raspberry Pi Pico ID
+	    pico_unique_board_id_t board_id;
+	    pico_get_unique_board_id(&board_id);
+	
+	    // Create UUID
+	    char uuid[15];
+	    snprintf_P(uuid, sizeof(uuid), PSTR("%02X%02X%02X%02X%02X%02X%02X\0"), 
+	                device_id, 
+	                board_id.id[1], board_id.id[2], board_id.id[3], board_id.id[4], board_id.id[5], board_id.id[6]); // DEV_ID[2] + CHIPID[12]
+	    new_device.uuid = strdup(uuid);
+	    new_device.serial = strdup(uuid);
+    #endif
 
-    // Create Serialnumber
-    char serial[15];
-    sprintf(serial, "221703K0%06X\0", chip_id); // "221703K0" + CHIPID
-    new_device.serial = strdup(serial);
+    DEBUG_MSG_FAUXMO("[FAUXMO] Device #%d ,%s\n", device_id, uuid);
 
     // TCP Server
     new_device.server = new AsyncServer(_base_port + device_id);
@@ -377,7 +387,7 @@ bool fauxmoESP::renameDevice(unsigned char id, const char * device_name) {
 }
 
 char * fauxmoESP::getDeviceName(unsigned char id, char * device_name, size_t len) {
-    if (0 <= id && id <= _devices.size()) {
+    if ((0 <= id) && (id <= _devices.size()) && (device_name != NULL)) {
         strncpy(device_name, _devices[id].name, len);
     }
     return device_name;

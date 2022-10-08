@@ -44,6 +44,8 @@ THE SOFTWARE.
 #define UDP_RESPONSES_INTERVAL  250
 #define UDP_RESPONSES_TRIES     5
 
+//#define DEBUG_FAUXMO Serial
+
 #ifdef DEBUG_FAUXMO
     #define DEBUG_MSG_FAUXMO(...) DEBUG_FAUXMO.printf( __VA_ARGS__ )
 #else
@@ -58,6 +60,8 @@ THE SOFTWARE.
 #elif defined(ESP8266)
 	#include <ESP8266WiFi.h>
 	#include <ESPAsyncTCP.h>
+#elif defined(ARDUINO_RASPBERRY_PI_PICO_W)
+	#include <AsyncTCP_RP2040W.h>
 #else
 	#error Platform not supported
 #endif
@@ -65,10 +69,10 @@ THE SOFTWARE.
 #include <WiFiUdp.h>
 #include <functional>
 #include <vector>
-#include <WeMo.h>
+#include "WeMo.h"
 
-typedef std::function<void(unsigned char, const char *, bool)> TSetStateCallback;
-typedef std::function<bool(unsigned char, const char *)> TGetStateCallback;
+typedef std::function<void(unsigned char, const char *, bool, unsigned char)> TSetStateCallback;
+typedef std::function<void(unsigned char, const char *, bool&, unsigned char&)> TGetStateCallback;
 
 typedef struct {
     char * name;
@@ -99,7 +103,7 @@ class fauxmoESP {
 
     private:
 
-        bool _enabled = true;
+        bool _enabled = false;
         unsigned int _base_port = DEFAULT_TCP_BASE_PORT;
         std::vector<fauxmoesp_device_t> _devices;
 		#ifdef ESP8266
