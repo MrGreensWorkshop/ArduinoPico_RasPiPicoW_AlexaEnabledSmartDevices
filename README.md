@@ -19,14 +19,14 @@ I also made Config manager for ease of installation. I'm happy if you consider [
 
 ### Features
 
-- FauxmoBelkinPlug for Raspberry Pi Pico W (ported from: FauxmoESP v2.4.4)
-- FauxmoPhilipsLight for Raspberry Pi Pico W (ported from: FauxmoESP v3.4)
+- Fauxmo Belkin Plug for Raspberry Pi Pico W (ported from: FauxmoESP v2.4.4)
+- Fauxmo Philips Light for Raspberry Pi Pico W (ported from: FauxmoESP v3.4)
 - Config manager
   - Wifi and device settings over Web interface
   - Firmware update and FileSystem upload feature with HTTP basic authentication
 - Examples
-  - Stock example of FauxmoBelkinPlug
-  - Stock example of FauxmoPhilipsLight
+  - Basic example of Fauxmo Belkin Plug
+  - Basic example of Fauxmo Philips Light
   - Smart light
   - Dimmable smart light
 
@@ -56,18 +56,18 @@ I also made Config manager for ease of installation. I'm happy if you consider [
 
 | Arduino core | AsyncTCP_RP2040W | Fauxmo | Gen | Works |
 | :----------- | ---------------- | ------ | --- | ----- |
-| v2.6.0 | v1.1.0 |	FauxmoBelkinPlug | 1,2 | OK |
-| v2.6.0 | v1.1.0 |	FauxmoPhilipsLight | 1,2 | OK |
+| v2.6.0 | v1.1.0 |	Fauxmo Belkin Plug | 1,2 | OK |
+| v2.6.0 | v1.1.0 |	Fauxmo Philips Light | 1,2 | OK |
 
 #### ESP8266
 
 | Arduino core | ESPAsyncTCP      | Fauxmo | Gen | Works |
 | :----------- | ---------------- | ------ | --- | ----- |
-| v2.3.0 | v1.1.0 | FauxmoBelkinPlug | 1,2 | OK |
+| v2.3.0 | v1.1.0 | Fauxmo Belkin Plug | 1,2 | OK |
 
-FauxmoPhilipsLight should be supported all three generation of Amazon echo devices. Since I only have first and second generation Amazon Echo devices, I didn't test with third generation devices. Please let me know if you have third generation devices and if it's working. If you don't know which device you have, please check [this page](https://www.amazon.com/gp/help/customer/display.html?nodeId=GHRYQ6GHE4A5TUD2).
+Fauxmo Philips Light should be supported all three generation of Amazon echo devices. Since I only have first and second generation Amazon Echo devices, I didn't test with third generation devices. Please let me know if you have third generation devices and if it's working. If you don't know which device you have, please check [this page](https://www.amazon.com/gp/help/customer/display.html?nodeId=GHRYQ6GHE4A5TUD2).
 
-FauxmoBelkinPlug only works with Gen 1,2 because only one port(80) is allowed. 
+Fauxmo Belkin Plug only works with Gen 1,2 because only one port(80) is allowed. 
 
 ### Documentation
 
@@ -113,5 +113,5 @@ This project incorporates libraries written below. Without these libraries, I co
 
 | Library                              | file |
 | :----------------------------------- | ---- |
-| [FauxmoESP v3.4](https://github.com/vintlabs/fauxmoESP/tree/3.4), Copyright (C) 2016-2020 by Xose Pérez, 2020 by Paul Vint. FauxmoESP is distributed under the terms of the MIT License. | [/library/FauxmoBelkinPlug/src](https://github.com/MrGreensWorkshop/arduinoPico_RasPiPicoW_AlexaEnabledSmartDevices/tree/95f45b6efa152797f380ea1a021564a6f752f7ff/library/FauxmoBelkinPlug/src) |
-| [FauxmoESP v2.4.4](https://github.com/vintlabs/fauxmoESP/tree/2.4.4), Copyright (C) 2016-2018 by Xose Pérez. FauxmoESP is distributed under the terms of the MIT License. | [/library/FauxmoPhilipsLight/src](https://github.com/MrGreensWorkshop/arduinoPico_RasPiPicoW_AlexaEnabledSmartDevices/tree/95f45b6efa152797f380ea1a021564a6f752f7ff/library/FauxmoPhilipsLight/src) |
+| [FauxmoESP v3.4](https://github.com/vintlabs/fauxmoESP/tree/3.4), Copyright (C) 2016-2020 by Xose Pérez, 2020 by Paul Vint. FauxmoESP is distributed under the terms of the MIT License. | [/library/Fauxmo Belkin Plug/src](https://github.com/MrGreensWorkshop/arduinoPico_RasPiPicoW_AlexaEnabledSmartDevices/tree/95f45b6efa152797f380ea1a021564a6f752f7ff/library/Fauxmo Belkin Plug/src) |
+| [FauxmoESP v2.4.4](https://github.com/vintlabs/fauxmoESP/tree/2.4.4), Copyright (C) 2016-2018 by Xose Pérez. FauxmoESP is distributed under the terms of the MIT License. | [/library/Fauxmo Philips Light/src](https://github.com/MrGreensWorkshop/arduinoPico_RasPiPicoW_AlexaEnabledSmartDevices/tree/95f45b6efa152797f380ea1a021564a6f752f7ff/library/Fauxmo Philips Light/src) |
