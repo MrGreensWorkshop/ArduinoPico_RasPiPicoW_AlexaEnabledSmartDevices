@@ -113,5 +113,5 @@ This project incorporates libraries written below. Without these libraries, I co
 
 | Library                              | file |
 | :----------------------------------- | ---- |
-| [FauxmoESP v3.4](https://github.com/vintlabs/fauxmoESP/tree/3.4), Copyright (C) 2016-2020 by Xose Pérez, 2020 by Paul Vint. FauxmoESP is distributed under the terms of the MIT License. | commit |
-| [FauxmoESP v2.4.4](https://github.com/vintlabs/fauxmoESP/tree/2.4.4), Copyright (C) 2016-2018 by Xose Pérez. FauxmoESP is distributed under the terms of the MIT License. | commit |
+| [FauxmoESP v3.4](https://github.com/vintlabs/fauxmoESP/tree/3.4), Copyright (C) 2016-2020 by Xose Pérez, 2020 by Paul Vint. FauxmoESP is distributed under the terms of the MIT License. | [/library/FauxmoBelkinPlug/src](https://github.com/MrGreensWorkshop/arduinoPico_RasPiPicoW_AlexaEnabledSmartDevices/tree/95f45b6efa152797f380ea1a021564a6f752f7ff/library/FauxmoBelkinPlug/src) |
+| [FauxmoESP v2.4.4](https://github.com/vintlabs/fauxmoESP/tree/2.4.4), Copyright (C) 2016-2018 by Xose Pérez. FauxmoESP is distributed under the terms of the MIT License. | [/library/FauxmoPhilipsLight/src](https://github.com/MrGreensWorkshop/arduinoPico_RasPiPicoW_AlexaEnabledSmartDevices/tree/95f45b6efa152797f380ea1a021564a6f752f7ff/library/FauxmoPhilipsLight/src) |
