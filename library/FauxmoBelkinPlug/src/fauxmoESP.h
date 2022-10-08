@@ -1,6 +1,6 @@
 /*
 
-FAUXMO ESP 2.4.4
+FAUXMO ESP
 
 Copyright (C) 2016 by Xose Pérez <xose dot perez at gmail dot com>
 
@@ -25,6 +25,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
+/*
+ * Fauxmo Belkin Plug v1.0
+ */
 
 #pragma once
 

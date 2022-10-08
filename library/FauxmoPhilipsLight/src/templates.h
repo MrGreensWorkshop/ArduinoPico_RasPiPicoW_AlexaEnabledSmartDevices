@@ -26,6 +26,10 @@ THE SOFTWARE.
 
 */
 
+/*
+ * Fauxmo Philips Light v1.0
+ */
+
 #pragma once
 
 PROGMEM const char FAUXMO_TCP_HEADERS[] =

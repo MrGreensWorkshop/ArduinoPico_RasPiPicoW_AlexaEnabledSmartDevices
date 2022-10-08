@@ -26,6 +26,10 @@ THE SOFTWARE.
 
 */
 
+/*
+ * Fauxmo Philips Light v1.0
+ */
+
 #include <Arduino.h>
 #include "fauxmoESP.h"
 

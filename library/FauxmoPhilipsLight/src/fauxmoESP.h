@@ -26,6 +26,10 @@ THE SOFTWARE.
 
 */
 
+/*
+ * Fauxmo Philips Light v1.0
+ */
+
 #pragma once
 
 #define FAUXMO_UDP_MULTICAST_IP     IPAddress(239,255,255,250)
