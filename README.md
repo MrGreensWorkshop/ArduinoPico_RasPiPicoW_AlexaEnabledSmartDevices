@@ -56,14 +56,14 @@ I also made Config manager for ease of installation. I'm happy if you consider [
 
 | Arduino core | AsyncTCP_RP2040W | Fauxmo | Gen | Works |
 | :----------- | ---------------- | ------ | --- | ----- |
-| v2.6.0 | v1.1.0 |	Fauxmo Belkin Plug | 1,2 | OK |
-| v2.6.0 | v1.1.0 |	Fauxmo Philips Light | 1,2 | OK |
+| [v2.6.0](https://github.com/earlephilhower/arduino-pico/tree/2.6.0) | [v1.1.0](https://github.com/khoih-prog/AsyncTCP_RP2040W/tree/v1.1.0) |	Fauxmo Belkin Plug | 1,2 | OK |
+| [v2.6.0](https://github.com/earlephilhower/arduino-pico/tree/2.6.0) | [v1.1.0](https://github.com/khoih-prog/AsyncTCP_RP2040W/tree/v1.1.0) |	Fauxmo Philips Light | 1,2 | OK |
 
 #### ESP8266
 
 | Arduino core | ESPAsyncTCP      | Fauxmo | Gen | Works |
 | :----------- | ---------------- | ------ | --- | ----- |
-| v2.3.0 | v1.1.0 | Fauxmo Belkin Plug | 1,2 | OK |
+| [v2.3.0](https://github.com/esp8266/Arduino/tree/2.3.0) | [v1.1.2](https://github.com/me-no-dev/ESPAsyncTCP/tree/a57560d977602145cfadae84ae28f2ec69b361f5) | Fauxmo Belkin Plug | 1,2 | OK |
 
 Fauxmo Philips Light should be supported all three generation of Amazon echo devices. Since I only have first and second generation Amazon Echo devices, I didn't test with third generation devices. Please let me know if you have third generation devices and if it's working. If you don't know which device you have, please check [this page](https://www.amazon.com/gp/help/customer/display.html?nodeId=GHRYQ6GHE4A5TUD2).
 

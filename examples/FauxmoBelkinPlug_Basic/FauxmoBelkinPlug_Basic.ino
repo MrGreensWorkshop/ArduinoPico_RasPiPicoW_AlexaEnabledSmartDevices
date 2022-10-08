@@ -1,18 +1,28 @@
 #include <Arduino.h>
-#ifdef ESP32
-    #include <WiFi.h>
-#else
+#if defined(ESP8266)
     #include <ESP8266WiFi.h>
+    #define MCU  ESP
+#elif defined(ESP32)
+    #include <WiFi.h>
+    #define MCU  ESP
+#elif defined(ARDUINO_RASPBERRY_PI_PICO_W)
+    #include <pico/cyw43_arch.h>
+    #define MCU  rp2040
+#else
+	#error Platform not supported
 #endif
-#include "fauxmoESP.h"
+
+#include "src/fauxmoESP.h"
 
 #define WIFI_SSID "..."
 #define WIFI_PASS "..."
 
 #define SERIAL_BAUDRATE                 115200
-#define LED                             2
+#define LED                             2 //GP2
 
 fauxmoESP fauxmo;
+
+bool SwitchState = false;
 
 // -----------------------------------------------------------------------------
 // Wifi
@@ -35,12 +45,19 @@ void wifiSetup() {
     Serial.println();
 
     // Connected!
+#ifdef ARDUINO_RASPBERRY_PI_PICO_W
+    Serial.printf("[WIFI] STATION Mode, SSID: %s, IP address: %s\n", WiFi.SSID(), WiFi.localIP().toString().c_str());
+#else
     Serial.printf("[WIFI] STATION Mode, SSID: %s, IP address: %s\n", WiFi.SSID().c_str(), WiFi.localIP().toString().c_str());
-
+#endif
 }
 
 void setup() {
 
+    // LED
+    pinMode(LED, OUTPUT);
+    digitalWrite(LED, LOW);
+    
     // Init serial port and clean garbage
     Serial.begin(SERIAL_BAUDRATE);
     Serial.println();
@@ -49,10 +66,6 @@ void setup() {
     // Wifi
     wifiSetup();
 
-    // LED
-    pinMode(LED, OUTPUT);
-    digitalWrite(LED, HIGH);
-
     // You have to call enable(true) once you have a WiFi connection
     // You can enable or disable the library at any moment
     // Disabling it will prevent the devices from being discovered and switched
@@ -60,8 +73,8 @@ void setup() {
 
     // Add virtual devices
     fauxmo.addDevice("switch one");
-	//fauxmo.addDevice("switch two"); // You can add more devices
-	//fauxmo.addDevice("switch three");
+    //fauxmo.addDevice("switch two"); // You can add more devices
+    //fauxmo.addDevice("switch three");
     //fauxmo.addDevice("switch four");
     //fauxmo.addDevice("switch five");
     //fauxmo.addDevice("switch six");
@@ -71,15 +84,16 @@ void setup() {
     //fauxmo.addDevice("switch ten");
 
     // fauxmoESP 2.0.0 has changed the callback signature to add the device_id,
-    // this way it's easier to match devices to action without having to compare strings.
-    fauxmo.onSetState([](unsigned char device_id, const char * device_name, bool state) {
+    // this way it's easier to match devices to action without having to compare strings. (value is not functional)
+    fauxmo.onSetState([](unsigned char device_id, const char * device_name, bool state, unsigned char value) {
         Serial.printf("[MAIN] Device #%d (%s) state: %s\n", device_id, device_name, state ? "ON" : "OFF");
-        digitalWrite(LED, !state);
+        SwitchState = state;
+        digitalWrite(LED, state);
     });
 
-    // Callback to retrieve current state (for GetBinaryState queries)
-    fauxmo.onGetState([](unsigned char device_id, const char * device_name) {
-        return !digitalRead(LED);
+    // Callback to retrieve current state (for GetBinaryState queries) (value is not functional)
+    fauxmo.onGetState([](unsigned char device_id, const char * device_name, bool &state, unsigned char &value) {
+        state = SwitchState;
     });
 
 }
@@ -97,7 +111,7 @@ void loop() {
     static unsigned long last = millis();
     if (millis() - last > 5000) {
         last = millis();
-        Serial.printf("[MAIN] Free heap: %d bytes\n", ESP.getFreeHeap());
+        Serial.printf("[MAIN] Free heap: %d bytes\n", MCU.getFreeHeap());
     }
 
 }
