@@ -1,5 +1,5 @@
 /*
- * Smart Light v1.0.0
+ * Dimmable Smart Light v1.0.0
  * 
  * Copyright (c) 2022 Mr. Green's Workshop https://www.MrGreensWorkshop.com
  *
@@ -44,12 +44,26 @@ bool SwitchState = false;
 bool SendFlag = false;
 
 unsigned char Device_id = 0;
+unsigned char Device_value = 255; //set to max
+int Device_led_value = 0; //OFF
+int Device_set_value = 0; //OFF
+const int Device_led_step = 10;
 
-void deviceControlOutput(bool stat) {
-  if (stat == 1){
-    digitalWrite(OutputDeviceLed, HIGH);//ON
-  }else{
-    digitalWrite(OutputDeviceLed, LOW);//OFF
+
+void ledFadeOutput(void) {
+  //Led Brightness fade
+  static unsigned long last = millis();
+  if (millis() - last > 25) {
+    last = millis();
+    if (Device_led_value < Device_set_value) {
+      Device_led_value += Device_led_step;
+      if (Device_led_value > Device_set_value) Device_led_value = Device_set_value;
+    }
+    if (Device_led_value > Device_set_value) {
+      Device_led_value -= Device_led_step;
+      if (Device_led_value < Device_set_value) Device_led_value = Device_set_value;  
+    }
+    analogWrite(OutputDeviceLed, Device_led_value);
   }
 }
 
@@ -83,7 +97,7 @@ void setup() {
   pinMode(statusLed, OUTPUT);   //Status LED (H:ON, L:OFF)
 
   //set default states
-  deviceControlOutput(false);  //power OFF
+  analogWrite(OutputDeviceLed, 0);  //power OFF
   AllLed(false);    //All LEDs OFF
 
   delay(200);
@@ -116,12 +130,19 @@ void setup() {
   // This has to be done before the call to enable()
   fauxmo.createServer(true); // not needed, this is the default value
   fauxmo.setPort(80); // This is required for gen3 devices
+#else
+  #error "This example only works with fauxmoESP v3.4"
 #endif
 
   // You have to call enable(true) once you have a WiFi connection
   // You can enable or disable the library at any moment
   // Disabling it will prevent the devices from being discovered and switched
   fauxmo.enable(true);
+
+  // You can use different ways to invoke alexa to modify the devices state:
+  // "Alexa, turn SmartDevice on"
+  // "Alexa, turn on SmartDevice
+  // "Alexa, set SmartDevice to fifty percent"
 
   // Add virtual devices
   fauxmo.addDevice(cfgMngr.getDeviceName());
@@ -214,18 +235,18 @@ bool wifiSetup(const char* ssid, const char* pass, const char* host) {
   return configMode;
 }
 
-// when fauxmoESP v2.4.4 is used, value is not functional.
 void onSetStateCallback(unsigned char device_id, const char * device_name, bool state, unsigned char value) {
   DBG("[MAIN] Device #%d (%s) state: %s value: %d\n", device_id, device_name, state ? "ON" : "OFF", value);
   SwitchState = state;
   Device_id = device_id;
+  Device_value = value;
   SendFlag = true;
 }
 
-// when fauxmoESP v2.4.4 is used, value is not functional.
 void onGetStateCallback(unsigned char device_id, const char * device_name, bool &state, unsigned char &value) {
   DBG("onGetStateCallback\n");
   state = SwitchState;
+  value = Device_value;
 }
 
 // Button push and release check with state machine for debouncing.
@@ -279,10 +300,10 @@ void outputControl(void) {
       case 0:
         if (SwitchState == true){
           DBG("Plug ON\n");
-          deviceControlOutput(true);
+          Device_set_value = Device_value;
         }else{
           DBG("Plug OFF\n");
-          deviceControlOutput(false);
+          Device_set_value = 0;
         }
         break;
     }
@@ -296,6 +317,7 @@ void outputControl(void) {
     disableNetReq = false;
     DBG("Network request re-enabled\n");
   }
+  ledFadeOutput();
 }
 
 void loop_fauxmo() {
