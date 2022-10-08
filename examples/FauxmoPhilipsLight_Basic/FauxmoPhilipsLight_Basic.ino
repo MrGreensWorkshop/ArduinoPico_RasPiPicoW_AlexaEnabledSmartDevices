@@ -1,10 +1,18 @@
 #include <Arduino.h>
-#ifdef ESP32
-    #include <WiFi.h>
-#else
+#if defined(ESP8266)
     #include <ESP8266WiFi.h>
+    #define MCU  ESP
+#elif defined(ESP32)
+    #include <WiFi.h>
+    #define MCU  ESP
+#elif defined(ARDUINO_RASPBERRY_PI_PICO_W)
+    #include <pico/cyw43_arch.h>
+    #define MCU  rp2040
+#else
+	#error Platform not supported
 #endif
-#include "fauxmoESP.h"
+
+#include "src/fauxmoESP.h"
 
 #define WIFI_SSID "..."
 #define WIFI_PASS "..."
@@ -15,17 +23,17 @@ fauxmoESP fauxmo;
 
 #define SERIAL_BAUDRATE     115200
 
-#define LED_YELLOW          4
-#define LED_GREEN           5
-#define LED_BLUE            0
-#define LED_PINK            2
-#define LED_WHITE           15
+#define LED_YELLOW          2 //GP2
+//#define LED_GREEN           5
+//#define LED_BLUE            0
+//#define LED_PINK            2
+//#define LED_WHITE           15
 
 #define ID_YELLOW           "yellow lamp"
-#define ID_GREEN            "green lamp"
-#define ID_BLUE             "blue lamp"
-#define ID_PINK             "pink lamp"
-#define ID_WHITE            "white lamp"
+//#define ID_GREEN            "green lamp"
+//#define ID_BLUE             "blue lamp"
+//#define ID_PINK             "pink lamp"
+//#define ID_WHITE            "white lamp"
 
 // -----------------------------------------------------------------------------
 
@@ -50,8 +58,11 @@ void wifiSetup() {
     Serial.println();
 
     // Connected!
+#ifdef ARDUINO_RASPBERRY_PI_PICO_W
+    Serial.printf("[WIFI] STATION Mode, SSID: %s, IP address: %s\n", WiFi.SSID(), WiFi.localIP().toString().c_str());
+#else
     Serial.printf("[WIFI] STATION Mode, SSID: %s, IP address: %s\n", WiFi.SSID().c_str(), WiFi.localIP().toString().c_str());
-
+#endif
 }
 
 void setup() {
@@ -63,15 +74,15 @@ void setup() {
 
     // LEDs
     pinMode(LED_YELLOW, OUTPUT);
-    pinMode(LED_GREEN, OUTPUT);
-    pinMode(LED_BLUE, OUTPUT);
-    pinMode(LED_PINK, OUTPUT);
-    pinMode(LED_WHITE, OUTPUT);
+    //pinMode(LED_GREEN, OUTPUT);
+    //pinMode(LED_BLUE, OUTPUT);
+    //pinMode(LED_PINK, OUTPUT);
+    //pinMode(LED_WHITE, OUTPUT);
     digitalWrite(LED_YELLOW, LOW);
-    digitalWrite(LED_GREEN, LOW);
-    digitalWrite(LED_BLUE, LOW);
-    digitalWrite(LED_PINK, LOW);
-    digitalWrite(LED_WHITE, LOW);
+    //digitalWrite(LED_GREEN, LOW);
+    //digitalWrite(LED_BLUE, LOW);
+    //digitalWrite(LED_PINK, LOW);
+    //digitalWrite(LED_WHITE, LOW);
 
     // Wifi
     wifiSetup();
@@ -94,10 +105,10 @@ void setup() {
 
     // Add virtual devices
     fauxmo.addDevice(ID_YELLOW);
-    fauxmo.addDevice(ID_GREEN);
-    fauxmo.addDevice(ID_BLUE);
-    fauxmo.addDevice(ID_PINK);
-    fauxmo.addDevice(ID_WHITE);
+    //fauxmo.addDevice(ID_GREEN);
+    //fauxmo.addDevice(ID_BLUE);
+    //fauxmo.addDevice(ID_PINK);
+    //fauxmo.addDevice(ID_WHITE);
 
     fauxmo.onSetState([](unsigned char device_id, const char * device_name, bool state, unsigned char value) {
         
@@ -114,7 +125,7 @@ void setup() {
 
         if (strcmp(device_name, ID_YELLOW)==0) {
             digitalWrite(LED_YELLOW, state ? HIGH : LOW);
-        } else if (strcmp(device_name, ID_GREEN)==0) {
+        }/* else if (strcmp(device_name, ID_GREEN)==0) {
             digitalWrite(LED_GREEN, state ? HIGH : LOW);
         } else if (strcmp(device_name, ID_BLUE)==0) {
             digitalWrite(LED_BLUE, state ? HIGH : LOW);
@@ -122,7 +133,7 @@ void setup() {
             digitalWrite(LED_PINK, state ? HIGH : LOW);
         } else if (strcmp(device_name, ID_WHITE)==0) {
             digitalWrite(LED_WHITE, state ? HIGH : LOW);
-        }
+        }*/
 
     });
 
@@ -139,7 +150,7 @@ void loop() {
     static unsigned long last = millis();
     if (millis() - last > 5000) {
         last = millis();
-        Serial.printf("[MAIN] Free heap: %d bytes\n", ESP.getFreeHeap());
+        Serial.printf("[MAIN] Free heap: %d bytes\n", MCU.getFreeHeap());
     }
 
     // If your device state is changed by any other means (MQTT, physical button,...)

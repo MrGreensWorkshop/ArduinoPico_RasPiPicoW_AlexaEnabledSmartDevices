@@ -131,7 +131,7 @@ void setup() {
   fauxmo.createServer(true); // not needed, this is the default value
   fauxmo.setPort(80); // This is required for gen3 devices
 #else
-  #error "This example only works with fauxmoESP v3.4"
+  #error This example only works with fauxmoESP v3.4
 #endif
 
   // You have to call enable(true) once you have a WiFi connection
