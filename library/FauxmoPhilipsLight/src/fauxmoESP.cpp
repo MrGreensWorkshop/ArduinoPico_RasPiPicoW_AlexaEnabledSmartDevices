@@ -581,6 +581,19 @@ void fauxmoESP::enable(bool enable) {
         #endif
         DEBUG_MSG_FAUXMO("[FAUXMO] UDP server started\n");
 
+	} else {
+
+		// Stop TCP server if internal
+		if (_internal) {
+			if (NULL != _server) {
+				_server->end();
+				delete _server;
+				DEBUG_MSG_FAUXMO("[FAUXMO] server deleted\n");
+			}
+		}
+
+		// Stop UDP
+		_udp.stopAll();
 	}
 
 }
