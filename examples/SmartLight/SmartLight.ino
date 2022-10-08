@@ -214,7 +214,7 @@ bool wifiSetup(const char* ssid, const char* pass, const char* host) {
   return configMode;
 }
 
-// when fauxmoESP v2.4.4 is used, value is not functional.
+// when Fauxmo Belkin Plug is used, value is not functional.
 void onSetStateCallback(unsigned char device_id, const char * device_name, bool state, unsigned char value) {
   DBG("[MAIN] Device #%d (%s) state: %s value: %d\n", device_id, device_name, state ? "ON" : "OFF", value);
   SwitchState = state;
@@ -222,7 +222,7 @@ void onSetStateCallback(unsigned char device_id, const char * device_name, bool 
   SendFlag = true;
 }
 
-// when fauxmoESP v2.4.4 is used, value is not functional.
+// when Fauxmo Belkin Plug is used, value is not functional.
 void onGetStateCallback(unsigned char device_id, const char * device_name, bool &state, unsigned char &value) {
   DBG("onGetStateCallback\n");
   state = SwitchState;
