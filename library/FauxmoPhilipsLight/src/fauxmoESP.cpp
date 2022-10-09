@@ -27,7 +27,7 @@ THE SOFTWARE.
 */
 
 /*
- * Fauxmo Philips Light v1.0
+ * Fauxmo Philips Light v1.0.0
  */
 
 #include <Arduino.h>

@@ -27,7 +27,7 @@ THE SOFTWARE.
 */
 
 /*
- * Fauxmo Belkin Plug v1.0
+ * Fauxmo Belkin Plug v1.0.0
  */
 
 #include "fauxmoESP.h"
