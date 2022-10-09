@@ -58,7 +58,7 @@ I put Config Manager and Fauxmo to corresponding sample folders so that you can 
 1. Install [Arduino IDE](https://www.arduino.cc/en/software) 1.8 or 2.0 to your OS.
 1. Install [Raspberry Pi Pico Arduino core](https://github.com/earlephilhower/arduino-pico).
 1. Install [AsyncTCP_RP2040W library](https://github.com/khoih-prog/AsyncTCP_RP2040W).
-1. [Download](https://github.com/MrGreensWorkshop/arduinoPico_RasPiPicoW_AlexaEnabledSmartDevices/releases/latest) the least release named "examples.zip" and Unzip.
+1. From the [latest release](https://github.com/MrGreensWorkshop/arduinoPico_RasPiPicoW_AlexaEnabledSmartDevices/releases/latest), download the "examples.zip" under the Assets, and Unzip.
 1. Open one of the examples in Arduino IDE.
 1. Select the board from, `Menu > Tools > Board > Raspberry Pi RP2040 boards > Raspberry Pi Pico W`.
 1. Select your Wifi region from, `Menu > Tools > WiFi Region`.
