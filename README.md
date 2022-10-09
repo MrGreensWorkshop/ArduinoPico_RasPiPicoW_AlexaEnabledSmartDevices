@@ -25,10 +25,14 @@ I also made Config Manager for ease of installation. I'm happy if you consider [
   - Wifi and device settings over Web interface
   - Firmware update and FileSystem upload feature with HTTP basic authentication
 - Examples
-  - Basic example of Fauxmo Belkin Plug
-  - Basic example of Fauxmo Philips Light
-  - Smart light
-  - Dimmable smart light
+  - DimmableSmartLight
+    - On/Off control and brightness control of a Led
+  - SmartLight
+    - On/Off control of digital output
+  - FauxmoPhilipsLight_Basic
+    - Basic example of Fauxmo Philips Light (On/Off)
+  - FauxmoBelkinPlug_Basic
+    - Basic example of Fauxmo Belkin Plug (On/Off)
 
 ### Release (example.zip)
 
@@ -38,18 +42,20 @@ I put Config Manager and Fauxmo to corresponding sample folders so that you can 
 <examples>/
 │
 ├── DimmableSmartLight
+│   ├── <Config Manager>
 │   └── src
-│       └── FauxmoPhilipsLight
+│       └── <FauxmoPhilipsLight>
 ├── SmartLight
+│   ├── <Config Manager>
 │   └── src
-│       └── FauxmoPhilipsLight (interchangeable with FauxmoBelkinPlug)
+│       └── <FauxmoPhilipsLight> (interchangeable with FauxmoBelkinPlug)
 │           (If you want to change it, replace src folder with FauxmoBelkinPlug_Basic/src)
 ├── FauxmoPhilipsLight_Basic
 │   └── src
-│       └── FauxmoPhilipsLight
+│       └── <FauxmoPhilipsLight>
 └── FauxmoBelkinPlug_Basic
     └── src
-        └── FauxmoBelkinPlug
+        └── <FauxmoBelkinPlug>
 ```
 
 ### Compilation
@@ -58,17 +64,21 @@ I put Config Manager and Fauxmo to corresponding sample folders so that you can 
 1. Install [Arduino IDE](https://www.arduino.cc/en/software) 1.8 or 2.0 to your OS.
 1. Install [Raspberry Pi Pico Arduino core](https://github.com/earlephilhower/arduino-pico).
 1. Install [AsyncTCP_RP2040W library](https://github.com/khoih-prog/AsyncTCP_RP2040W).
-1. From the [latest release](https://github.com/MrGreensWorkshop/arduinoPico_RasPiPicoW_AlexaEnabledSmartDevices/releases/latest), download the "examples.zip" under the Assets, and Unzip.
+1. From the [latest release](https://github.com/MrGreensWorkshop/arduinoPico_RasPiPicoW_AlexaEnabledSmartDevices/releases/latest), download the "examples.zip" under the Assets, and unzip.
 1. Open one of the examples in Arduino IDE.
 1. Select the board from, `Menu > Tools > Board > Raspberry Pi RP2040 boards > Raspberry Pi Pico W`.
 1. Select your Wifi region from, `Menu > Tools > WiFi Region`.
-1. To compile and get the binary, click "Export compiled Binary" from, `Menu > Sketch > WiFi Region` and your binary will be exported to currently opened example folder.
+1. To compile and get the binary, click `Menu > Sketch > Export compiled Binary` and your binary will be exported to opened example folder.
 
 ### Running
 
-1. Get the binary
+1. Build this test circuit for Raspberry Pi Pico W
+
+<img src="/docs/CircuitSketchForRaspberryPiPicoW.jpg" height="300" alt="Amazon Alexa enabled smart device test circuit for Raspberry Pi Pico W">
+
+2. Get the binary
     - You can compile examples and get the binary as explained above.
-    - Or you can use precompiled binary files inside of each example folder.
+    - Or you can use precompiled binary files inside of each example folder if applicable.
 1. Put the Raspberry Pi Pico W into bootloader mode by pushing bootsel button, while plugging to your computer. 
 1. Copy the ".uf2" file to your Raspberry Pi Pico W's storage.
 
