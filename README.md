@@ -30,6 +30,28 @@ I also made Config manager for ease of installation. I'm happy if you consider [
   - Smart light
   - Dimmable smart light
 
+### Release (example.zip)
+
+I put Config Manager and Fauxmo to corresponding sample folders so that you can open and compile projects easily. I've also included precompiled binaries for Raspberry Pi Pico W, for examples with Configuration manager.
+
+```
+<examples>/
+│
+├── DimmableSmartLight
+│   └── src
+│       └── FauxmoPhilipsLight
+├── SmartLight
+│   └── src
+│       └── FauxmoPhilipsLight (interchangeable with FauxmoBelkinPlug)
+│           (If you want to change it, replace src folder with FauxmoBelkinPlug_Basic/src)
+├── FauxmoPhilipsLight_Basic
+│   └── src
+│       └── FauxmoPhilipsLight
+└── FauxmoBelkinPlug_Basic
+    └── src
+        └── FauxmoBelkinPlug
+```
+
 ### Compilation
 
 1. Check out [this video](https://www.youtube.com/channel/UCf-BfpqjqvPKGXFc22rkR9w) on YouTube.
@@ -47,8 +69,8 @@ I also made Config manager for ease of installation. I'm happy if you consider [
 1. Get the binary
     - You can compile examples and get the binary as explained above.
     - Or you can use precompiled binary files inside of each example folder.
-1. Put the Raspberry Pi Pico into bootloader mode by pushing bootsel button, while plugging to your computer. 
-1. Copy the ".UF2" file to your Raspberry Pi Pico W's storage.
+1. Put the Raspberry Pi Pico W into bootloader mode by pushing bootsel button, while plugging to your computer. 
+1. Copy the ".uf2" file to your Raspberry Pi Pico W's storage.
 
 ### Current Status
 
@@ -56,18 +78,18 @@ I also made Config manager for ease of installation. I'm happy if you consider [
 
 | Arduino core | AsyncTCP_RP2040W | Fauxmo | Gen | Works |
 | :----------- | ---------------- | ------ | --- | ----- |
-| [v2.6.0](https://github.com/earlephilhower/arduino-pico/tree/2.6.0) | [v1.1.0](https://github.com/khoih-prog/AsyncTCP_RP2040W/tree/v1.1.0) |	[Fauxmo Belkin Plug](/library/FauxmoBelkinPlug/src/) | 1,2 | OK |
-| [v2.6.0](https://github.com/earlephilhower/arduino-pico/tree/2.6.0) | [v1.1.0](https://github.com/khoih-prog/AsyncTCP_RP2040W/tree/v1.1.0) |	[Fauxmo Philips Light](/library/FauxmoPhilipsLight/src/) | 1,2 | OK |
+| [v2.6.0](https://github.com/earlephilhower/arduino-pico/tree/2.6.0) | [v1.1.0](https://github.com/khoih-prog/AsyncTCP_RP2040W/tree/v1.1.0) |	[Fauxmo Belkin Plug v1.0](/library/FauxmoBelkinPlug/src/) | 1,2 | OK |
+| [v2.6.0](https://github.com/earlephilhower/arduino-pico/tree/2.6.0) | [v1.1.0](https://github.com/khoih-prog/AsyncTCP_RP2040W/tree/v1.1.0) |	[Fauxmo Philips Light v1.0](/library/FauxmoPhilipsLight/src/) | 1,2 | OK |
 
 #### ESP8266
 
 | Arduino core | ESPAsyncTCP      | Fauxmo | Gen | Works |
 | :----------- | ---------------- | ------ | --- | ----- |
-| [v2.3.0](https://github.com/esp8266/Arduino/tree/2.3.0) | [v1.1.2](https://github.com/me-no-dev/ESPAsyncTCP/tree/a57560d977602145cfadae84ae28f2ec69b361f5) | [Fauxmo Belkin Plug](/library/FauxmoBelkinPlug/src/) | 1,2 | OK |
+| [v2.3.0](https://github.com/esp8266/Arduino/tree/2.3.0) | [v1.1.2](https://github.com/me-no-dev/ESPAsyncTCP/tree/a57560d977602145cfadae84ae28f2ec69b361f5) | [Fauxmo Belkin Plug v1.0](/library/FauxmoBelkinPlug/src/) | 1,2 | OK |
 
 Fauxmo Philips Light should be supported all three generation of Amazon echo devices. Since I only have first and second generation Amazon Echo devices, I didn't test with third generation devices. Please let me know if you have third generation devices and if it's working. If you don't know which device you have, please check [this page](https://www.amazon.com/gp/help/customer/display.html?nodeId=GHRYQ6GHE4A5TUD2).
 
-Fauxmo Belkin Plug only works with Gen 1,2 because only one port(80) is allowed. 
+Fauxmo Belkin Plug only works with Gen 1,2 because to work with Gen 3, TCP port must be fixed to 80.
 
 ### Documentation
 
@@ -111,7 +133,7 @@ Thank you!
 
 This project incorporates libraries written below. Without these libraries, I couldn't make this project possible.
 
-| Library                              | file |
-| :----------------------------------- | ---- |
-| [FauxmoESP v3.4](https://github.com/vintlabs/fauxmoESP/tree/3.4), Copyright (C) 2016-2020 by Xose Pérez, 2020 by Paul Vint. FauxmoESP is distributed under the terms of the MIT License. | [/library/FauxmoBelkinPlug](https://github.com/MrGreensWorkshop/arduinoPico_RasPiPicoW_AlexaEnabledSmartDevices/tree/95f45b6efa152797f380ea1a021564a6f752f7ff/library/FauxmoBelkinPlug/src) |
-| [FauxmoESP v2.4.4](https://github.com/vintlabs/fauxmoESP/tree/2.4.4), Copyright (C) 2016-2018 by Xose Pérez. FauxmoESP is distributed under the terms of the MIT License. | [/library/FauxmoPhilipsLight](https://github.com/MrGreensWorkshop/arduinoPico_RasPiPicoW_AlexaEnabledSmartDevices/tree/95f45b6efa152797f380ea1a021564a6f752f7ff/library/FauxmoPhilipsLight/src) |
+| Library                              | file(s) |
+| :----------------------------------- | ------- |
+| [FauxmoESP v3.4](https://github.com/vintlabs/fauxmoESP/tree/3.4), Copyright (C) 2016-2020 by Xose Pérez, 2020 by Paul Vint. FauxmoESP is distributed under the terms of the MIT License. | [FauxmoBelkinPlug](https://github.com/MrGreensWorkshop/arduinoPico_RasPiPicoW_AlexaEnabledSmartDevices/tree/95f45b6efa152797f380ea1a021564a6f752f7ff/library/FauxmoBelkinPlug/src) |
+| [FauxmoESP v2.4.4](https://github.com/vintlabs/fauxmoESP/tree/2.4.4), Copyright (C) 2016-2018 by Xose Pérez. FauxmoESP is distributed under the terms of the MIT License. | [FauxmoPhilipsLight](https://github.com/MrGreensWorkshop/arduinoPico_RasPiPicoW_AlexaEnabledSmartDevices/tree/95f45b6efa152797f380ea1a021564a6f752f7ff/library/FauxmoPhilipsLight/src) |
