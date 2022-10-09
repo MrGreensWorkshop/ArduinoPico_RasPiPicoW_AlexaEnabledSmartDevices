@@ -15,13 +15,13 @@
 
 There is an open source project called [FauxmoESP](https://github.com/vintlabs/fauxmoESP) which emulates lights and plugs for Amazon Echo devices using ESP microcontrollers. Back in the day, I used to use this library with ESP8266 to make Alexa enabled devices. So I ported to Raspberry Pi Pico W and added some features that I think were necessary.
 
-I also made Config manager for ease of installation. I'm happy if you consider [supporting me](#you-can-support-my-work). Thanks.
+I also made Config Manager for ease of installation. I'm happy if you consider [supporting me](#you-can-support-my-work). Thanks.
 
 ### Features
 
 - Fauxmo Belkin Plug for Raspberry Pi Pico W (ported from: FauxmoESP v2.4.4)
 - Fauxmo Philips Light for Raspberry Pi Pico W (ported from: FauxmoESP v3.4)
-- Config manager
+- Config Manager
   - Wifi and device settings over Web interface
   - Firmware update and FileSystem upload feature with HTTP basic authentication
 - Examples
@@ -32,7 +32,7 @@ I also made Config manager for ease of installation. I'm happy if you consider [
 
 ### Release (example.zip)
 
-I put Config Manager and Fauxmo to corresponding sample folders so that you can open and compile projects easily. I've also included precompiled binaries for Raspberry Pi Pico W, for examples with Configuration manager.
+I put Config Manager and Fauxmo to corresponding sample folders so that you can open and compile projects easily. I've also included precompiled binaries for Raspberry Pi Pico W, for examples with Config Manager.
 
 ```
 <examples>/
