@@ -325,12 +325,17 @@ void loop_fauxmo() {
   // Therefore, we have to manually poll for UDP packets
   fauxmo.handle();
   
-  // This is a sample code to output free heap every 5 seconds
-  // This is a cheap way to detect memory leaks
+  // Check Wifi connection and memory leaks
   static unsigned long last = millis();
   if (millis() - last > 5000) {
-      last = millis();
-      DBG("[MAIN] Free heap: %d bytes\n", MCU.getFreeHeap());
+    last = millis();
+    DBG("[MAIN] Free heap: %d bytes\n", MCU.getFreeHeap());
+    if (WiFi.status() != WL_CONNECTED) {
+      WiFi.disconnect();
+      DBG("[MAIN] Wifi disconnected. Rebooting\n");
+      delay(100);
+      MCU.restart();
+    }
   }
 
   outputControl();
