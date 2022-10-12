@@ -11,11 +11,17 @@
 
 ---
 
+[<img src="/docs/video_pic.jpg" height="250" alt="Alexa-enabled devices with Raspberry Pi Pico W">](https://youtu.be/laeV6GgGJMA)
+
 ### Introduction
 
-There is an open source project called [FauxmoESP](https://github.com/vintlabs/fauxmoESP) which emulates lights and plugs for Amazon Echo devices using ESP microcontrollers. Back in the day, I used to use this library with ESP8266 to make Alexa enabled devices. So I ported to Raspberry Pi Pico W and added some features that I think were necessary.
+This project helps you create your custom voice controlled smart devices for Amazon Alexa with Raspberry Pi Pico W. You can make Amazon Alexa voice controlled lights, devices etc. It also includes features like Wifi Config manager and Firmware update over Web interface for ease of installation. Start controlling your devices with Amazon Alexa and Raspberry Pi Pico W today!
 
-I also made Config Manager for ease of installation. I'm happy if you consider [supporting me](#you-can-support-my-work). Thanks.
+I'm happy if you consider [supporting me](#you-can-support-my-work). Thanks.
+
+#### Background
+
+There was an open source project called [FauxmoESP](https://github.com/vintlabs/fauxmoESP) which emulates lights and plugs for Amazon Echo devices using ESP microcontrollers. Back in the day, I used to use this library with ESP8266 to make Alexa enabled devices. So I ported to Raspberry Pi Pico W and added some features that I think were necessary.
 
 ### Features
 
@@ -60,7 +66,7 @@ I put Config Manager and Fauxmo to corresponding sample folders so that you can 
 
 ### Compilation
 
-1. Check out [this video](https://www.youtube.com/channel/UCf-BfpqjqvPKGXFc22rkR9w) on YouTube.
+1. Make sure you watch the video at the top of the page.
 1. Install [Arduino IDE](https://www.arduino.cc/en/software) 1.8 or 2.0 to your OS.
 1. Install [Raspberry Pi Pico Arduino core](https://github.com/earlephilhower/arduino-pico).
 1. Install [AsyncTCP_RP2040W library](https://github.com/khoih-prog/AsyncTCP_RP2040W).
@@ -103,7 +109,7 @@ Fauxmo Belkin Plug only works with Gen 1,2 because to work with Gen 3, TCP port 
 
 ### Documentation
 
-Check out [this video](https://www.youtube.com/channel/UCf-BfpqjqvPKGXFc22rkR9w) on YouTube
+Check out the video at the top of the page.
 
 ### Credits
 
