@@ -11,7 +11,7 @@
 
 ---
 
-[<img src="/docs/video_pic.jpg" height="250" alt="Alexa-enabled devices with Raspberry Pi Pico W">](https://youtu.be/laeV6GgGJMA)
+[<img src="/docs/video_pic.jpg" max-height="250" alt="Alexa-enabled devices with Raspberry Pi Pico W">](https://youtu.be/laeV6GgGJMA)
 
 ### Introduction
 
