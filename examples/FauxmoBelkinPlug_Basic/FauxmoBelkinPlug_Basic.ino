@@ -22,6 +22,7 @@
 
 fauxmoESP fauxmo;
 
+// This is for one device only. You need an array for multiple devices.
 bool SwitchState = false;
 
 // -----------------------------------------------------------------------------
@@ -87,12 +88,15 @@ void setup() {
     // this way it's easier to match devices to action without having to compare strings. (value is not functional)
     fauxmo.onSetState([](unsigned char device_id, const char * device_name, bool state, unsigned char value) {
         Serial.printf("[MAIN] Device #%d (%s) state: %s\n", device_id, device_name, state ? "ON" : "OFF");
-        SwitchState = state;
         digitalWrite(LED, state);
+        // This is for one device only. You need an array for multiple devices.
+        SwitchState = state;
     });
 
     // Callback to retrieve current state (for GetBinaryState queries) (value is not functional)
     fauxmo.onGetState([](unsigned char device_id, const char * device_name, bool &state, unsigned char &value) {
+        Serial.println("onGetStateCallback");
+        // This is for one device only. You need an array for multiple devices.
         state = SwitchState;
     });
 

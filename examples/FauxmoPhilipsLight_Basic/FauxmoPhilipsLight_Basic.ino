@@ -19,6 +19,9 @@
 
 fauxmoESP fauxmo;
 
+// This is for one device only. You need an array for multiple devices.
+bool SwitchState = false;
+
 // -----------------------------------------------------------------------------
 
 #define SERIAL_BAUDRATE     115200
@@ -134,7 +137,15 @@ void setup() {
         } else if (strcmp(device_name, ID_WHITE)==0) {
             digitalWrite(LED_WHITE, state ? HIGH : LOW);
         }*/
+        // This is for one device only. You need an array for multiple devices.
+        SwitchState = state;
+    });
 
+    // Callback to retrieve current state
+    fauxmo.onGetState([](unsigned char device_id, const char * device_name, bool &state, unsigned char &value) {
+        Serial.println("onGetStateCallback");
+        // This is for one device only. You need an array for multiple devices.
+        state = SwitchState;
     });
 
 }
