@@ -17,7 +17,7 @@
 
 This project helps you create your custom voice controlled smart devices for Amazon Alexa with Raspberry Pi Pico W. You can make Amazon Alexa voice controlled lights, devices etc. It also includes features like Wifi Config manager and Firmware update over Web interface for ease of installation. Start controlling your devices with Amazon Alexa and Raspberry Pi Pico W today!
 
-I'm happy if you consider [supporting me](#you-can-support-my-work). Thanks.
+Thank you for considering [supporting my work!](#you-can-support-my-work)
 
 #### Background
 
