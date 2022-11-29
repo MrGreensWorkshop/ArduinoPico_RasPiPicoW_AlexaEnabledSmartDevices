@@ -11,7 +11,7 @@ body:
     label: Please check these items before go any further
     description: Please search to see if an issue already exists for the bug you encountered.
     options:
-    - label: I have watched [the related video](https://www.youtube.com/channel/UCf-BfpqjqvPKGXFc22rkR9w) on YouTube.
+    - label: I have watched [the related video](https://youtu.be/laeV6GgGJMA) on YouTube.
       required: true
     - label: I have searched the existing [Issues](https://github.com/MrGreensWorkshop/arduinoPico_RasPiPicoW_AlexaEnabledSmartDevices/issues/).
       required: true
