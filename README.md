@@ -141,10 +141,6 @@ As it says in the [MIT license](https://github.com/MrGreensWorkshop/arduinoPico_
 
 `Copyright (c) 2022 Mr. Green's Workshop https://www.MrGreensWorkshop.com`
 
-Please add link to my page so I can get credit for my work.
-
-Thank you!
-
 ### Other Licenses
 
 This project incorporates libraries written below. Without these libraries, I couldn't make this project possible.
